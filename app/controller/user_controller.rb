@@ -1,11 +1,20 @@
+require 'pry'
 class UserController < ApplicationController
-  register Sinatra::Flash
+
 
   get '/signup' do
     if !logged_in?
       erb :'users/create_user'
     else
-      redirect '/consoles'
+      redirect '/home'
+    end
+  end
+
+  get '/login' do
+    if !logged_in?
+      erb :'users/login'
+    else
+      redirect '/home'
     end
   end
 
@@ -14,8 +23,24 @@ class UserController < ApplicationController
     if params[:username] == "" || params[:password] == ""
       flash[:error] = "You must enter a username AND a password"
       redirect '/signup'
+    else
+      @user = User.create(params)
+      session[:user_id] = @user.id
+      redirect '/home'
     end
+  end
 
+  post '/login' do
+    login(params[:username], params[:password])
+  end
+
+  get '/logout' do
+    if logged_in?
+      session.destroy
+      redirect '/'
+    else
+      redirect '/'
+    end
   end
 
 end

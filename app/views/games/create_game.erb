@@ -1,0 +1,19 @@
+<h1> Add a game to your library: </h1>
+<form action="/games" method="POST">
+<label for="game_name">Name: </label>
+<input type="text" name="game[name]" placeholder="Game Name" id="game_name">
+
+<%if !Console.all == []%>
+<h3>Choose the console this game belongs to:</h3>
+<%Console.all.each do |console|%>
+  <%=console.name%>
+  <input type="radio" name="game[console_id]" value="<%=console.id%>">
+  <%end%>
+  or
+<%end%>
+
+<h3>Create the console this game belongs to!</h3>
+<label for="game_console">Name: </label>
+<input type="text" name="console[name]" placeholder="Game Console" id="game_console">
+<input type="submit" value="create game"
+</form>

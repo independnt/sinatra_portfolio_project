@@ -1,1 +1,13 @@
-<center><h1>Welcome to your Games Library!</h1><center>
+<center><h1>Welcome to your Games Library <%=current_user.username%>!</h1><center><br></br>
+
+<%if Console.all == []%>
+  <h4>Your Library is currently empty!<br>
+    click <a href="/games/new">here</a> to add some games!</h4>
+
+<%else%>
+  <ul>
+  <%@console.each do |console|%>
+    <li>console.name</li>
+    <%end%>
+  </ul>
+<%end%>

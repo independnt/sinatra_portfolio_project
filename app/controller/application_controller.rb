@@ -1,6 +1,7 @@
 require './config/environment'
 require 'sinatra/flash'
 class ApplicationController < Sinatra::Base
+  register Sinatra::Flash
 
   configure do
     set :public_folder, 'public'
@@ -10,7 +11,11 @@ class ApplicationController < Sinatra::Base
   end
 
   get '/' do
-    erb :index
+    if !logged_in?
+      erb :index
+    else
+      redirect '/home'
+    end
   end
 
   helpers do
@@ -20,18 +25,20 @@ class ApplicationController < Sinatra::Base
     end
 
     def current_user
-      @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
+      @current_user ||= User.find_by(id: session[:user_id]) if session[:user_id]
     end
 
     def login(username, password)
       user = User.find_by(:username => username)
       if user && user.authenticate(password)
         session[:user_id] = user.id
-        redirect to '/tweets'
+        redirect to '/home'
       else
-        redirect '/users/login'
+        flash[:login_error] = "Your username or password doesn't match our records, please try again!"
+        redirect '/login'
       end
     end
+
 
   end
 
