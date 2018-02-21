@@ -1,20 +1,20 @@
 class UserController < ApplicationController
+  register Sinatra::Flash
 
   get '/signup' do
-
-    erb :'users/create_user'
+    if !logged_in?
+      erb :'users/create_user'
+    else
+      redirect '/consoles'
+    end
   end
 
-  helper do
-
-    def logged_in?
-      !!current_user
+  post '/signup' do
+    puts params
+    if params[:username] == "" || params[:password] == ""
+      flash[:error] = "You must enter a username AND a password"
+      redirect '/signup'
     end
-
-    def current_user
-      @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
-    end
-
 
   end
 
