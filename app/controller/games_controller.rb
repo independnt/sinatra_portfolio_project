@@ -66,8 +66,10 @@ class GamesController < ApplicationController
         @console.save
         @game.console_id = @console.id
         @game.save
+        flash[:edit_success] = "Your game has been successfully edited!"
         redirect "/games/#{@game.id}"
       end
+      flash[:edit_success] = "Your game has been successfully edited!"
       redirect "/games/#{@game.id}"
     end
 
