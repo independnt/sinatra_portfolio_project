@@ -69,5 +69,15 @@ class GamesController < ApplicationController
       redirect "/games/#{@game.id}"
     end
 
+    delete '/games/:id/delete' do
+      if logged_in?
+        @game = Game.find_by_id(params[:id])
+        @game.delete
+        redirect '/home'
+      else
+        redirect '/login'
+      end
+    end
+
 
 end
