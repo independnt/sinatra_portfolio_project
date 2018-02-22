@@ -50,6 +50,7 @@ class GamesController < ApplicationController
         flash[:game_success] = "Your game has been successfully added!"
         redirect "/games/#{@game.id}"
       end
+      flash[:game_success] = "Your game has been successfully added!"
       redirect "/games/#{@game.id}"
     end
 
@@ -74,7 +75,8 @@ class GamesController < ApplicationController
       if logged_in?
         @game = Game.find_by_id(params[:id])
         @game.delete
-        redirect '/consoles'
+        flash[:delete_success] = "#{@game.name} has been deleted."
+        redirect "/consoles/#{@game.console.id}"
       else
         redirect '/login'
       end
