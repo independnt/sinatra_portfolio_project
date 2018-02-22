@@ -1,3 +1,4 @@
+require 'pry'
 class ConsoleController < ApplicationController
 
   get '/home' do
@@ -24,6 +25,14 @@ class ConsoleController < ApplicationController
     else
       redirect '/login'
     end
+  end
+
+  patch '/consoles/:id' do
+    @console = Console.find_by_id(params[:id])
+    @console.update(name: params[:name])
+    @console.save
+    flash[:console_success] = "Your console has been updated!"
+    redirect "/consoles/#{@console.id}"
   end
 
 

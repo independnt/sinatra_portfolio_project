@@ -47,6 +47,7 @@ class GamesController < ApplicationController
         @console.save
         @game.console_id = @console.id
         @game.save
+        flash[:game_success] = "Your game has been successfully added!"
         redirect "/games/#{@game.id}"
       end
       redirect "/games/#{@game.id}"
