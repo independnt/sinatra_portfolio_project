@@ -24,7 +24,7 @@ class GamesController < ApplicationController
         erb :'games/edit'
       else
         redirect '/login'
-      end 
+      end
     end
 
     post '/games' do
@@ -42,6 +42,23 @@ class GamesController < ApplicationController
         if duplicate_console?(params[:console_name])
           flash[:duplicate_error] = "This console already exists, please select it from the options provided!"
           redirect '/games/new'
+        end
+        @console = current_user.consoles.build(name: params[:console_name])
+        @console.save
+        @game.console_id = @console.id
+        @game.save
+        redirect "/games/#{@game.id}"
+      end
+      redirect "/games/#{@game.id}"
+    end
+
+    patch '/games/:id' do
+      @game = Game.find_by_id(params[:id])
+      @game.update(params[:game])
+      if !params[:console_name].empty?
+        if duplicate_console?(params[:console_name])
+          flash[:duplicate_error] = "This console already exists, please select it from the options provided!"
+          redirect "/games/#{@game.id}/edit"
         end
         @console = current_user.consoles.build(name: params[:console_name])
         @console.save
