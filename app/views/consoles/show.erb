@@ -1,0 +1,6 @@
+<h1><%=@console.name%>'s games!</h1>
+
+
+<%@console.games.each do |game|%>
+  <%=game.name%>&nbsp;<a href="/games/<%=game.id%>/edit">Edit Game</a>
+<%end%>

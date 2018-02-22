@@ -39,6 +39,10 @@ class ApplicationController < Sinatra::Base
       end
     end
 
+    def duplicate_console?(name)
+      !!current_user.consoles.map{|console| console.name.delete(" ").downcase}.include?(name.delete(" ").downcase)
+    end
+
 
   end
 

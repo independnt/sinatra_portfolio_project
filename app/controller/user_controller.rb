@@ -19,7 +19,6 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-    puts params
     if params[:username] == "" || params[:password] == ""
       flash[:error] = "You must enter a username AND a password"
       redirect '/signup'

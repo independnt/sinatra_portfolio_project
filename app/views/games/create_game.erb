@@ -3,9 +3,9 @@
 <label for="game_name">Name: </label>
 <input type="text" name="game[name]" placeholder="Game Name" id="game_name">
 
-<%if Console.all != []%>
+<%if current_user.consoles != []%>
 <h3>Choose the console this game belongs to:</h3>
-<%Console.all.each do |console|%>
+<%current_user.consoles.each do |console|%>
   <%=console.name%>
   <input type="radio" name="game[console_id]" value="<%=console.id%>">
   <%end%>

@@ -2,11 +2,19 @@ class ConsoleController < ApplicationController
 
   get '/home' do
     if logged_in?
-      @consoles = Console.all
       erb :'/consoles/index'
     else
       redirect '/login'
-    end   
+    end
+  end
+
+  get '/consoles/:id' do 
+    if logged_in?
+      @console = Console.find_by_id(params[:id])
+      erb :'consoles/show'
+    else
+      redirect '/login'
+    end
   end
 
 end
