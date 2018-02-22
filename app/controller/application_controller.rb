@@ -43,6 +43,9 @@ class ApplicationController < Sinatra::Base
       !!current_user.consoles.map{|console| console.name.delete(" ").downcase}.include?(name.delete(" ").downcase)
     end
 
+    def duplicate_user?(name)
+      !!User.all.map {|user| user.username}.include?(name)
+    end
 
   end
 

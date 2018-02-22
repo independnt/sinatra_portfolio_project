@@ -20,6 +20,9 @@ class UserController < ApplicationController
     if params[:username] == "" || params[:password] == ""
       flash[:error] = "You must enter a username AND a password"
       redirect '/signup'
+    elsif duplicate_user?(params[:username])
+      flash[:user_exists] = "This user already exists, create a new username or click log in."
+      redirect '/signup'
     else
       @user = User.create(params)
       session[:user_id] = @user.id
