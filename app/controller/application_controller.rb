@@ -14,7 +14,7 @@ class ApplicationController < Sinatra::Base
     if !logged_in?
       erb :index
     else
-      redirect '/home'
+      redirect '/consoles'
     end
   end
 
@@ -32,7 +32,7 @@ class ApplicationController < Sinatra::Base
       user = User.find_by(:username => username)
       if user && user.authenticate(password)
         session[:user_id] = user.id
-        redirect to '/home'
+        redirect to '/consoles'
       else
         flash[:login_error] = "Your username or password doesn't match our records, please try again!"
         redirect '/login'

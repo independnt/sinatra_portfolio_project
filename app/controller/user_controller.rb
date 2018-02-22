@@ -1,4 +1,3 @@
-require 'pry'
 class UserController < ApplicationController
 
 
@@ -6,7 +5,7 @@ class UserController < ApplicationController
     if !logged_in?
       erb :'users/create_user'
     else
-      redirect '/home'
+      redirect '/consoles'
     end
   end
 
@@ -14,7 +13,7 @@ class UserController < ApplicationController
     if !logged_in?
       erb :'users/login'
     else
-      redirect '/home'
+      redirect '/consoles'
     end
   end
 
@@ -25,7 +24,7 @@ class UserController < ApplicationController
     else
       @user = User.create(params)
       session[:user_id] = @user.id
-      redirect '/home'
+      redirect '/consoles'
     end
   end
 

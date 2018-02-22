@@ -74,7 +74,7 @@ class GamesController < ApplicationController
       if logged_in?
         @game = Game.find_by_id(params[:id])
         @game.delete
-        redirect '/home'
+        redirect '/consoles'
       else
         redirect '/login'
       end

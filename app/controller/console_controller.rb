@@ -1,7 +1,7 @@
 require 'pry'
 class ConsoleController < ApplicationController
 
-  get '/home' do
+  get '/consoles' do
     if logged_in?
       erb :'/consoles/index'
     else
