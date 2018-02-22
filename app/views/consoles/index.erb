@@ -1,13 +1,13 @@
 <center><h1>Welcome to your Games Library <%=current_user.username%>!</h1></center><br></br>
 
-<%if current_user.consoles == []%>
+<center><%if current_user.consoles == []%>
   <h4>Your Library is currently empty!<br>
-    click <a href="/games/new">here</a> to add some games!</h4>
+    click <a href="/games/new">here</a> to add some games!</h4></center>
 
 <%else%>
-  <ul>
+  <h3>Your consoles</h3>
   <%current_user.consoles.each do |console|%>
-    <li><a href='/consoles/<%=console.id%>'><%=console.name%></a></li>
+    <a href='/consoles/<%=console.id%>'><%=console.name%></a>&nbsp;<%=console.games.count%>&nbsp;Games<br></br>
     <%end%>
-  </ul>
+
 <%end%>
