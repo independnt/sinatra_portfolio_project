@@ -2,5 +2,13 @@
 
 
 <%@console.games.each do |game|%>
-  <%=game.name%>&nbsp;<a href="/games/<%=game.id%>/edit">Edit Game</a>
+  <h3><%=game.name%></h3>
+  <p><form method="POST" action="/games/<%=game.id%>/edit">
+    <input id="hidden" type="hidden" name="_method">
+    <input type="submit" value="Edit Game">
+  </form>
+  <form method="POST" action="/games/<%=game.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="DELETE">
+    <input type="submit" value="Delete Game">
+  </form></p>
 <%end%>
