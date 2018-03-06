@@ -6,7 +6,7 @@
   <input type="text" name="game[name]" id="game_name" value="<%=@game.name%>">
 
   <h3>Choose a new console if you'd like: </h3>
-  <%current_user.consoles.each do |console|%>
+  <%@consoles.each do |console|%>
     <%=console.name%>
     <input type="radio" name="game[console_id]" value="<%=console.id%>">
     <%end%>
